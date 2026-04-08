@@ -103,6 +103,29 @@ function LoginPage() {
         transition={{ duration: 0.5 }}
       >
         <Card sx={{ maxWidth: 440, mx: 'auto', mt: '8vh', p: 4, position: 'relative', zIndex: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
+            <Box
+              component="img"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+              alt="Government of India Emblem"
+              sx={{ width: 64, height: 64 }}
+            />
+          </Box>
+          <Typography
+            variant="subtitle2"
+            align="center"
+            sx={{ fontWeight: 700, letterSpacing: 1, color: 'text.secondary', textTransform: 'uppercase' }}
+          >
+            Government of India
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{ color: 'text.secondary', textAlign: 'center', display: 'block', mb: 2 }}
+          >
+            Ministry of Environment, Forest and Climate Change
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+
           <Box sx={{ textAlign: 'center', mb: 2.5 }}>
             <Box
               sx={{

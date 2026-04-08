@@ -2,6 +2,7 @@ import AccountTreeOutlined from '@mui/icons-material/AccountTreeOutlined'
 import AddLocationAlt from '@mui/icons-material/AddLocationAlt'
 import FiberNew from '@mui/icons-material/FiberNew'
 import ForestOutlined from '@mui/icons-material/ForestOutlined'
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
 import HourglassTopOutlined from '@mui/icons-material/HourglassTopOutlined'
 import InfoOutlined from '@mui/icons-material/InfoOutlined'
 import LocationOn from '@mui/icons-material/LocationOn'
@@ -36,6 +37,7 @@ import {
   Typography,
 } from '@mui/material'
 import { motion } from 'framer-motion'
+import React from 'react'
 import { useMemo, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { companies, GLOBAL_AVAILABLE_PARCELS } from '../data/companies'
@@ -45,6 +47,13 @@ function LandAllocation() {
   const [selectedState, setSelectedState] = useState('All')
   const [selectedArea, setSelectedArea] = useState('All')
   const [selectedDegradation, setSelectedDegradation] = useState('All')
+  const [appliedParcelIds, setAppliedParcelIds] = React.useState(() => {
+    try {
+      return JSON.parse(sessionStorage.getItem('gcp_applied_parcels') || '[]')
+    } catch {
+      return []
+    }
+  })
   const [applicationMessage, setApplicationMessage] = useState('')
   const [snackbarOpen, setSnackbarOpen] = useState(false)
 
@@ -88,6 +97,26 @@ function LandAllocation() {
     setSelectedArea('All')
     setSelectedDegradation('All')
   }
+
+  const handleApply = (parcelId) => {
+    setAppliedParcelIds((prev) => {
+      const updated = prev.includes(parcelId) ? prev : [...prev, parcelId]
+      sessionStorage.setItem('gcp_applied_parcels', JSON.stringify(updated))
+      return updated
+    })
+  }
+
+  const appliedParcels = useMemo(
+    () =>
+      appliedParcelIds
+        .map((id) => GLOBAL_AVAILABLE_PARCELS.find((parcel) => parcel.id === id))
+        .filter(Boolean),
+    [appliedParcelIds],
+  )
+
+  const availableParcels = filteredParcels.filter(
+    (parcel) => !appliedParcelIds.includes(parcel.id),
+  )
 
   const openApplicationToast = (parcelId) => {
     setApplicationMessage(
@@ -170,6 +199,56 @@ function LandAllocation() {
           </motion.div>
         )}
 
+        {appliedParcelIds.length > 0 && (
+          <Box
+            id="pending-applications-section"
+            sx={{
+              p: 2.5,
+              mb: 3,
+              borderRadius: 2,
+              backgroundColor: 'rgba(180, 100, 0, 0.15)',
+              borderLeft: '4px solid',
+              borderColor: 'warning.main',
+            }}
+          >
+            <Stack direction="row" alignItems="center" sx={{ mb: 1.5 }}>
+              <HourglassEmptyIcon sx={{ mr: 1 }} />
+              <Typography variant="h6">Pending Applications</Typography>
+              <Chip label={appliedParcelIds.length} color="warning" size="small" sx={{ ml: 1 }} />
+            </Stack>
+
+            <Grid container spacing={2}>
+              {appliedParcels.map((parcel) => (
+                <Grid key={parcel.id} item xs={12} sm={6} md={4} lg={3}>
+                  <motion.div
+                    initial={{ opacity: 0, y: -12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                  >
+                    <Card>
+                      <CardContent>
+                        <Stack spacing={0.5}>
+                          <Typography variant="subtitle2">Parcel ID: {parcel.id}</Typography>
+                          <Typography variant="body2">Location: {parcel.location}</Typography>
+                          <Typography variant="body2">Area: {parcel.area} ha</Typography>
+                          <Typography variant="body2">State: {parcel.state}</Typography>
+                          <Chip
+                            label="Pending ICFRE Review"
+                            color="warning"
+                            variant="outlined"
+                            size="small"
+                            sx={{ width: 'fit-content', mt: 1 }}
+                          />
+                        </Stack>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )}
+
         <Box>
           <Typography variant="h6" sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
             <FiberNew sx={{ color: '#16a34a' }} />
@@ -222,7 +301,7 @@ function LandAllocation() {
             variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
           >
             <Grid container spacing={2}>
-              {filteredParcels.map((p) => (
+              {availableParcels.map((p) => (
                 <Grid key={p.id} item xs={12} sm={6} md={4} lg={3}>
                   <motion.div variants={{ initial: { opacity: 0, scale: 0.95 }, animate: { opacity: 1, scale: 1 } }}>
                     <Card>
@@ -269,9 +348,16 @@ function LandAllocation() {
                           color="primary"
                           size="small"
                           fullWidth
-                          onClick={() => openApplicationToast(p.id)}
+                          disabled={appliedParcelIds.includes(p.id)}
+                          sx={appliedParcelIds.includes(p.id) ? { opacity: 0.6 } : undefined}
+                          onClick={() => {
+                            handleApply(p.id)
+                            openApplicationToast(p.id)
+                          }}
                         >
-                          Apply for Allocation
+                          {appliedParcelIds.includes(p.id)
+                            ? 'Application Submitted'
+                            : 'Apply for Allocation'}
                         </Button>
                       </CardActions>
                     </Card>

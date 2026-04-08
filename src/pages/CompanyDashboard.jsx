@@ -8,6 +8,7 @@ import VerifiedOutlined from '@mui/icons-material/VerifiedOutlined'
 import {
   Avatar,
   Box,
+  Tooltip,
   Card,
   CardContent,
   CardHeader,
@@ -74,6 +75,12 @@ function CompanyDashboard() {
     },
   ]
 
+  const scrollToPendingApplications = () => {
+    document
+      .getElementById('pending-applications-section')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
       <Stack spacing={3}>
@@ -121,31 +128,48 @@ function CompanyDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card>
-                  <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Box
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: 3,
-                        bgcolor: card.bg,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {card.icon}
-                    </Box>
-                    <Box>
-                      <Typography variant="h5" sx={{ color: '#14532d', fontWeight: 700 }}>
-                        {card.value}
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        {card.label}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </Card>
+                <Tooltip
+                  title="1 parcel is awaiting ICFRE verification. Click to review."
+                  placement="top"
+                  disableHoverListener={card.label !== 'Verification Status'}
+                >
+                  <Card
+                    onClick={card.label === 'Verification Status' ? scrollToPendingApplications : undefined}
+                    sx={
+                      card.label === 'Verification Status'
+                        ? {
+                            cursor: 'pointer',
+                            transition: 'box-shadow 0.2s',
+                            '&:hover': { boxShadow: 6 },
+                          }
+                        : undefined
+                    }
+                  >
+                    <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box
+                        sx={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: 3,
+                          bgcolor: card.bg,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        {card.icon}
+                      </Box>
+                      <Box>
+                        <Typography variant="h5" sx={{ color: '#14532d', fontWeight: 700 }}>
+                          {card.value}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {card.label}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Tooltip>
               </motion.div>
             </Grid>
           ))}

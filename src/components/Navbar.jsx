@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Chip,
+  Divider,
   IconButton,
   Stack,
   Toolbar,
@@ -49,6 +50,39 @@ function Navbar({ onMenuClick, isMobile }) {
         )}
 
         <Stack direction="row" alignItems="center" spacing={1.5} sx={{ flexGrow: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Box
+              component="img"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+              alt="Government of India Emblem"
+              sx={{ height: '36px', width: 'auto' }}
+            />
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <Typography
+                variant="caption"
+                fontWeight={700}
+                lineHeight={1.2}
+                letterSpacing={0.8}
+                sx={{ textTransform: 'uppercase', opacity: 0.85 }}
+              >
+                Government of India
+              </Typography>
+              <Typography
+                variant="caption"
+                lineHeight={1.2}
+                sx={{ opacity: 0.7, fontSize: '0.62rem' }}
+              >
+                Green Credit Programme
+              </Typography>
+            </Box>
+          </Box>
+
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ mx: 1.5, borderColor: 'rgba(255,255,255,0.25)' }}
+          />
+
           <IconButton
             disableRipple
             sx={{

@@ -15,6 +15,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Chip,
   FormControl,
   Grid,
   InputLabel,
@@ -141,73 +142,84 @@ function AIAnalytics() {
           </Select>
         </FormControl>
 
-        <Card>
-          <CardHeader
-            title="Satellite Snapshot Timeline"
-            avatar={<SatelliteAlt sx={{ color: '#16a34a' }} />}
-          />
-          <CardContent>
-            <Grid container spacing={2}>
-              {snapshots.map((snapshot) => (
-                <Grid key={snapshot.title} item xs={12} sm={6} md={3}>
-                  <Paper
-                    sx={{
-                      height: 160,
-                      borderRadius: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: snapshot.background,
-                      position: 'relative',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {snapshot.live && (
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: 10,
-                          right: 10,
-                          bgcolor: '#fff',
-                          color: '#dc2626',
-                          borderRadius: 3,
-                          px: 1,
-                          py: 0.2,
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.5,
-                          fontSize: '0.68rem',
-                          fontWeight: 700,
-                          animation: 'live-pulse 1s ease-in-out infinite alternate',
-                        }}
-                      >
-                        ● LIVE
-                      </Box>
-                    )}
+        <Paper sx={{ p: 3, mb: 4 }}>
+          <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
+            <SatelliteAlt sx={{ color: '#16a34a' }} />
+            <Typography variant="h6">Satellite Snapshot Timeline</Typography>
+          </Stack>
 
-                    {snapshot.icon}
-                    <Typography sx={{ fontWeight: 700, color: snapshot.textColor, mt: 0.8 }}>
-                      {snapshot.title}
-                    </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: snapshot.textColor }}>
-                      {snapshot.canopy}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </CardContent>
-        </Card>
+          <Grid container spacing={3}>
+            {snapshots.map((snapshot) => (
+              <Grid key={snapshot.title} item xs={6} sm={3}>
+                <Card
+                  sx={{
+                    position: 'relative',
+                    minHeight: 140,
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    p: 2,
+                    borderRadius: 3,
+                    background: snapshot.background,
+                  }}
+                >
+                  {snapshot.live && (
+                    <Chip
+                      label="● LIVE"
+                      color="error"
+                      size="small"
+                      sx={{ position: 'absolute', top: 8, right: 8 }}
+                    />
+                  )}
+
+                  <Box sx={{ mb: 1 }}>
+                    {snapshot.title === 'Baseline' && (
+                      <Nature sx={{ fontSize: 36, color: snapshot.textColor }} />
+                    )}
+                    {snapshot.title === '6-Month' && (
+                      <ForestOutlined sx={{ fontSize: 36, color: snapshot.textColor }} />
+                    )}
+                    {snapshot.title === '12-Month' && (
+                      <Public sx={{ fontSize: 36, color: snapshot.textColor }} />
+                    )}
+                    {snapshot.title === 'Live' && (
+                      <SatelliteAlt sx={{ fontSize: 36, color: snapshot.textColor }} />
+                    )}
+                  </Box>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: snapshot.textColor }}>
+                    {snapshot.canopy}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {snapshot.title}
+                  </Typography>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
 
         <Card sx={{ borderLeft: '4px solid #16a34a' }}>
           <CardHeader title="AI Analysis Summary" />
           <CardContent>
             <Grid container spacing={2}>
               {summaryMetrics.map((metric) => (
-                <Grid key={metric.label} item xs={12} sm={6} md={4}>
-                  <Paper sx={{ p: 2, backgroundColor: '#f0fdf4', borderRadius: 2 }}>
-                    <Box sx={{ mb: 0.6 }}>{metric.icon}</Box>
+                <Grid key={metric.label} item xs={6} sm={4} md={2}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      minHeight: 100,
+                      backgroundColor: '#f0fdf4',
+                      borderRadius: 2,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <Box sx={{ mb: 0.6, display: 'flex' }}>{metric.icon}</Box>
                     <Typography variant="caption" color="text.secondary">
                       {metric.label}
                     </Typography>
