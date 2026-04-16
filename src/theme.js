@@ -36,11 +36,15 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 16,
-          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
-          transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.05)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.4)',
+          transition: 'box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease',
           '&:hover': {
-            boxShadow: '0 4px 20px rgba(22,163,74,0.15)',
-            transform: 'translateY(-2px)',
+            boxShadow: '0 8px 28px rgba(22,163,74,0.14)',
+            transform: 'translateY(-3px)',
+            background: 'rgba(255, 255, 255, 0.95)',
           },
         },
       },

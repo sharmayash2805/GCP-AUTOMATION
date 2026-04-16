@@ -2,11 +2,13 @@ import EnergySavingsLeaf from '@mui/icons-material/EnergySavingsLeaf'
 import KeyOutlined from '@mui/icons-material/KeyOutlined'
 import LockOutlined from '@mui/icons-material/LockOutlined'
 import PersonOutlined from '@mui/icons-material/PersonOutlined'
+import ShieldOutlined from '@mui/icons-material/ShieldOutlined'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import {
   Alert,
   Box,
+  Button,
   Card,
   Divider,
   IconButton,
@@ -27,6 +29,7 @@ import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { companies } from '../data/companies'
+import emblem from '../assets/emblem.png'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -106,9 +109,9 @@ function LoginPage() {
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
             <Box
               component="img"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+              src={emblem}
               alt="Government of India Emblem"
-              sx={{ width: 64, height: 64 }}
+              sx={{ width: { xs: 52, sm: 64 }, height: { xs: 52, sm: 64 }, objectFit: 'contain' }}
             />
           </Box>
           <Typography
@@ -203,10 +206,32 @@ function LoginPage() {
               color="primary"
               fullWidth
               size="large"
-              sx={{ mb: 2 }}
+              sx={{ mb: 1.5 }}
             >
               Login to Portal
             </LoadingButton>
+
+            <Button
+              onClick={() => navigate('/admin/login')}
+              variant="outlined"
+              fullWidth
+              size="medium"
+              startIcon={<ShieldOutlined />}
+              sx={{
+                mb: 2,
+                borderColor: '#d97706',
+                color: '#d97706',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+                '&:hover': {
+                  borderColor: '#b45309',
+                  bgcolor: '#fffbeb',
+                  boxShadow: '0 4px 12px rgba(217,119,6,0.15)',
+                },
+              }}
+            >
+              Admin Login
+            </Button>
 
             <AnimatePresence>
               {error && (
