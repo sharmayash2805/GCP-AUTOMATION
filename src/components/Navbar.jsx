@@ -1,7 +1,7 @@
 import BusinessCenter from '@mui/icons-material/BusinessCenter'
 import EnergySavingsLeaf from '@mui/icons-material/EnergySavingsLeaf'
 import LogoutIcon from '@mui/icons-material/Logout'
-import MenuIcon from '@mui/icons-material/Menu'
+import { Menu } from 'lucide-react'
 import {
   AppBar,
   Box,
@@ -16,7 +16,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-function Navbar({ onMenuClick, isMobile }) {
+function Navbar({ onMenuClick }) {
   const navigate = useNavigate()
   const { currentUser, logout } = useAuth()
 
@@ -38,16 +38,29 @@ function Navbar({ onMenuClick, isMobile }) {
       }}
     >
       <Toolbar sx={{ minHeight: '64px !important', px: { xs: 1.5, sm: 2.5 } }}>
-        {isMobile && (
-          <IconButton
-            edge="start"
-            onClick={onMenuClick}
-            sx={{ mr: 1, color: '#14532d', display: { md: 'none' } }}
-            aria-label="open navigation"
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className="mr-3 w-9 h-9 flex items-center justify-center
+            rounded-lg text-gray-500 hover:text-green-700
+            hover:bg-green-50 transition-colors duration-150"
+          aria-label="Open menu"
+          style={{
+            marginRight: 12,
+            width: 36,
+            height: 36,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 8,
+            border: 0,
+            background: 'transparent',
+            cursor: 'pointer',
+            color: '#6b7280',
+          }}
+        >
+          <Menu className="w-5 h-5" />
+        </button>
 
         <Stack direction="row" alignItems="center" spacing={1.5} sx={{ flexGrow: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>

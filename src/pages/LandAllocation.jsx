@@ -39,6 +39,7 @@ import {
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useMemo, useState } from 'react'
+import ParcelMapDialog from '../components/ParcelMapDialog'
 import { useAuth } from '../context/AuthContext'
 import { companies, GLOBAL_AVAILABLE_PARCELS } from '../data/companies'
 
@@ -56,9 +57,10 @@ function LandAllocation() {
   })
   const [applicationMessage, setApplicationMessage] = useState('')
   const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const [selectedParcelForMap, setSelectedParcelForMap] = useState(null)
 
-  const handleViewOnMap = (lat, lng) => {
-    window.open(`https://www.google.com/maps?q=${lat},${lng}&z=13`, '_blank')
+  const handleViewOnMap = (parcel) => {
+    setSelectedParcelForMap(parcel)
   }
 
   const stateOptions = useMemo(
@@ -185,7 +187,7 @@ function LandAllocation() {
                             variant="outlined"
                             color="warning"
                             startIcon={<RoomOutlined />}
-                            onClick={() => handleViewOnMap(parcel.lat, parcel.lng)}
+                            onClick={() => handleViewOnMap(parcel)}
                           >
                             View on Map
                           </Button>
@@ -338,7 +340,7 @@ function LandAllocation() {
                           color="primary"
                           size="small"
                           fullWidth
-                          onClick={() => handleViewOnMap(p.lat, p.lng)}
+                          onClick={() => handleViewOnMap(p)}
                         >
                           📍 View on Map
                         </Button>
@@ -419,7 +421,7 @@ function LandAllocation() {
                           startIcon={<RoomOutlined />}
                           size="small"
                           variant="outlined"
-                          onClick={() => handleViewOnMap(parcel.lat, parcel.lng)}
+                          onClick={() => handleViewOnMap(parcel)}
                         >
                           View on Map
                         </Button>
@@ -468,7 +470,7 @@ function LandAllocation() {
                           startIcon={<RoomOutlined />}
                           size="small"
                           variant="outlined"
-                          onClick={() => handleViewOnMap(parcel.lat, parcel.lng)}
+                          onClick={() => handleViewOnMap(parcel)}
                         >
                           View on Map
                         </Button>
@@ -492,6 +494,12 @@ function LandAllocation() {
           {applicationMessage}
         </Alert>
       </Snackbar>
+
+      <ParcelMapDialog
+        open={Boolean(selectedParcelForMap)}
+        parcel={selectedParcelForMap}
+        onClose={() => setSelectedParcelForMap(null)}
+      />
     </motion.div>
   )
 }

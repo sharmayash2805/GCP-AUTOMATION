@@ -1,38 +1,31 @@
 import InfoOutlined from '@mui/icons-material/InfoOutlined'
-import { Alert, Box } from '@mui/material'
+import { Alert } from '@mui/material'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
-const drawerWidth = 240
-
 function Layout() {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prev) => !prev)
-  }
-
-  const handleDrawerClose = () => {
-    setMobileOpen(false)
+  const handleMenuToggle = () => {
+    setIsSidebarOpen((prev) => !prev)
   }
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      <Navbar onMenuClick={handleDrawerToggle} isMobile />
-      <Sidebar mobileOpen={mobileOpen} onClose={handleDrawerClose} />
+    <div className="min-h-screen bg-[#f0fdf4]" style={{ minHeight: '100vh', backgroundColor: '#f0fdf4' }}>
+      <div className="fixed top-0 left-0 right-0 z-30" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30 }}>
+        <Navbar onMenuClick={handleMenuToggle} />
+      </div>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          ml: { xs: 0, md: `${drawerWidth}px` },
-          mt: '64px',
-          p: 3,
-          backgroundColor: '#f0fdf4',
-          minHeight: 'calc(100vh - 64px)',
-        }}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+
+      <main
+        className="pt-16 min-h-screen w-full p-3 sm:p-4 md:p-6 bg-[#f0fdf4]"
+        style={{ paddingTop: 64, minHeight: '100vh', width: '100%', backgroundColor: '#f0fdf4', padding: '12px' }}
       >
         <Alert
           icon={<InfoOutlined sx={{ color: '#16a34a' }} />}
@@ -52,8 +45,8 @@ function Layout() {
         </Alert>
 
         <Outlet />
-      </Box>
-    </Box>
+      </main>
+    </div>
   )
 }
 

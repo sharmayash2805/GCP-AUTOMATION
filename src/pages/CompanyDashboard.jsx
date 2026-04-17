@@ -25,10 +25,13 @@ import {
   Stack,
 } from '@mui/material'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
+import ParcelMapDialog from '../components/ParcelMapDialog'
 import { useAuth } from '../context/AuthContext'
 
 function CompanyDashboard() {
   const { currentUser } = useAuth()
+  const [selectedParcelForMap, setSelectedParcelForMap] = useState(null)
 
   const totalLand = currentUser.allocatedParcels.reduce(
     (sum, parcel) => sum + parcel.area,
@@ -38,8 +41,8 @@ function CompanyDashboard() {
   const verificationStatus =
     currentUser.pendingParcels.length > 0 ? 'Pending ICFRE Review' : 'ICFRE Verified'
 
-  const handleViewOnMap = (lat, lng) => {
-    window.open(`https://www.google.com/maps?q=${lat},${lng}&z=13`, '_blank')
+  const handleViewOnMap = (parcel) => {
+    setSelectedParcelForMap(parcel)
   }
 
   const initials = currentUser.name
@@ -218,7 +221,7 @@ function CompanyDashboard() {
                           size="small"
                           variant="outlined"
                           color="primary"
-                          onClick={() => handleViewOnMap(parcel.lat, parcel.lng)}
+                          onClick={() => handleViewOnMap(parcel)}
                         >
                           View on Map
                         </Button>
@@ -231,6 +234,12 @@ function CompanyDashboard() {
           </CardContent>
         </Card>
       </Stack>
+
+      <ParcelMapDialog
+        open={Boolean(selectedParcelForMap)}
+        parcel={selectedParcelForMap}
+        onClose={() => setSelectedParcelForMap(null)}
+      />
     </motion.div>
   )
 }
