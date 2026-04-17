@@ -7,7 +7,6 @@ import CompanyDashboard from './pages/CompanyDashboard'
 import CreditsDashboard from './pages/CreditsDashboard'
 import LandAllocation from './pages/LandAllocation'
 import LoginPage from './pages/LoginPage'
-import AdminRoutes from './admin/AdminRoutes'
 
 function RootRedirect() {
   const { currentUser } = useAuth()
@@ -20,9 +19,6 @@ function App() {
     <Routes>
       <Route path="/" element={<RootRedirect />} />
       <Route path="/login" element={<LoginPage />} />
-
-      {/* Admin Portal — completely isolated */}
-      <Route path="/admin/*" element={<AdminRoutes />} />
 
       <Route
         element={
