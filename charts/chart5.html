@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP System - UI/UX Flow Poster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    },
+                    colors: {
+                        tech: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' },
+                        eco: { 400: '#34d399', 500: '#10b981', 600: '#059669', 900: '#064e3b' },
+                        accent: { blue: '#0ea5e9', amber: '#f59e0b', purple: '#8b5cf6' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* A3 Landscape Poster Setup */
+        @page { size: A3 landscape; margin: 0; }
+        body { 
+            background-color: #cbd5e1; 
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .a3-canvas {
+            width: 1587px; height: 1122px;
+            background-color: #ffffff;
+            /* Blueprint/Engineering subtle grid background */
+            background-image: linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative; box-sizing: border-box; padding: 40px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        
+        @media print {
+            body { background-color: white; }
+            .a3-canvas { width: 100%; height: 100%; padding: 10mm; box-shadow: none; border: none; }
+        }
+
+        /* Structural Elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Flow Connectors */
+        .flow-connector {
+            position: absolute;
+            background: #cbd5e1;
+            z-index: 0;
+        }
+
+        /* Screenshot Placeholder */
+        .screenshot-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            transition: all 0.2s;
+            overflow: hidden;
+            position: relative;
+        }
+        .screenshot-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 24px;
+            background: #e2e8f0;
+            border-bottom: 1px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+        }
+        .screenshot-box::after {
+            content: '•••';
+            position: absolute;
+            top: 2px; left: 8px;
+            color: #94a3b8;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="a3-canvas">
+        
+        <!-- HEADER -->
+        <header class="flex justify-between items-end pb-6 border-b-4 border-eco-500 mb-8 shrink-0 relative z-10">
+            <div class="flex items-center gap-6">
+                <!-- Tech/Eco Hybrid Logo -->
+                <div class="w-20 h-20 bg-tech-900 rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-eco-400 to-tech-900 opacity-20"></div>
+                    <svg class="w-12 h-12 text-eco-400 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-eco-600 font-bold tracking-widest uppercase text-sm mb-1">Application Structure & Interface Design</h3>
+                    <h1 class="text-5xl font-display font-extrabold text-tech-900 tracking-tight">Green Credit Automation Engine</h1>
+                    <h2 class="text-2xl font-medium text-slate-500 mt-1">Platform UI/UX Flow & Key Modules</h2>
+                </div>
+            </div>
+            
+            <div class="text-right">
+                <div class="inline-flex items-center gap-2 bg-slate-100 text-tech-800 px-4 py-2 rounded-lg font-bold text-sm border border-slate-200">
+                    <div class="w-2 h-2 rounded-full bg-eco-500 animate-pulse"></div>
+                    Live Prototype
+                </div>
+                <div class="mt-2 text-sm text-slate-400 font-mono">React + Vite SPA | Material UI</div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT: Project Flow -->
+        <div class="flex-1 flex flex-col min-h-0 relative z-10">
+            
+            <p class="text-slate-600 mb-6 max-w-4xl font-medium">
+                The platform is designed as a secure Single-Page Application (SPA) offering role-based access for corporations to seamlessly manage their ecological restoration lifecycle—from land discovery to credit redemption.
+            </p>
+
+            <div class="grid grid-cols-12 gap-6 flex-1">
+                
+                <!-- COLUMN 1: Entry & Overview (4/12) -->
+                <div class="col-span-4 flex flex-col gap-6">
+                    
+                    <!-- MODULE 1: Auth -->
+                    <div class="glass-panel p-5 border-l-4 border-l-tech-800 shadow-md relative">
+                        <div class="absolute -right-6 top-1/2 w-6 h-1 bg-slate-300"></div>
+                        <h3 class="font-display font-bold text-lg text-tech-900 mb-2 flex items-center gap-2">
+                            <span class="bg-tech-100 p-1.5 rounded text-tech-600">🔐</span> Module 1: Auth Gateway
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">Secure portal entry with role-based routing and multi-company context switching.</p>
+                        
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded p-2 text-xs font-semibold text-tech-800">✓ Credential Validation</div>
+                            <div class="bg-slate-50 border border-slate-200 rounded p-2 text-xs font-semibold text-tech-800">✓ Session Management</div>
+                        </div>
+
+                        <!-- Screenshot Slot -->
+                        <div class="screenshot-box h-32 w-full">
+                            <span class="text-2xl mb-1">📸</span>
+                            <span class="text-xs font-medium uppercase tracking-wider">Attach Login Page Here</span>
+                        </div>
+                    </div>
+
+                    <!-- MODULE 2: Dashboard -->
+                    <div class="glass-panel p-5 border-l-4 border-l-accent-blue shadow-md flex-1 flex flex-col relative">
+                        <div class="absolute -right-6 top-1/2 w-6 h-1 bg-slate-300"></div>
+                        <h3 class="font-display font-bold text-lg text-tech-900 mb-2 flex items-center gap-2">
+                            <span class="bg-blue-50 p-1.5 rounded text-accent-blue">📊</span> Module 2: Corporate Dashboard
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">High-level executive overview of active restoration projects and earned credits.</p>
+                        
+                        <div class="bg-blue-50/50 p-3 rounded-lg border border-blue-100 mb-4">
+                            <ul class="text-xs text-tech-800 space-y-2 font-medium">
+                                <li class="flex items-center gap-2"><span class="text-accent-blue">•</span> Company Profile & Metadata</li>
+                                <li class="flex items-center gap-2"><span class="text-accent-blue">•</span> KPI Summary Metrics (Area, Credits)</li>
+                                <li class="flex items-center gap-2"><span class="text-accent-blue">•</span> Allocated Parcels Quick-View Table</li>
+                            </ul>
+                        </div>
+
+                        <!-- Screenshot Slot -->
+                        <div class="screenshot-box flex-1 w-full min-h-[140px]">
+                            <span class="text-2xl mb-1">📸</span>
+                            <span class="text-xs font-medium uppercase tracking-wider">Attach Dashboard Here</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMN 2: Core Operations (4/12) -->
+                <div class="col-span-4 flex flex-col gap-6 relative">
+                    <!-- Vertical Connector Line connecting from Column 1 -->
+                    <div class="absolute -left-6 top-0 bottom-0 w-1 bg-slate-300"></div>
+
+                    <!-- MODULE 3: Land Allocation -->
+                    <div class="glass-panel p-5 border-l-4 border-l-eco-500 shadow-md flex-1 flex flex-col relative">
+                        <div class="absolute -left-6 top-1/4 w-6 h-1 bg-slate-300"></div>
+                        <h3 class="font-display font-bold text-lg text-tech-900 mb-2 flex items-center gap-2">
+                            <span class="bg-eco-50 p-1.5 rounded text-eco-600">🗺️</span> Module 3: Land Allocation
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">GIS-integrated marketplace for discovering and applying for degraded forest land.</p>
+                        
+                        <div class="bg-eco-50/50 p-3 rounded-lg border border-eco-100 mb-4">
+                            <ul class="text-xs text-tech-800 space-y-2 font-medium">
+                                <li class="flex items-center gap-2"><span class="text-eco-500">•</span> <strong>Pending Review Banner:</strong> Real-time status</li>
+                                <li class="flex items-center gap-2"><span class="text-eco-500">•</span> <strong>Available Parcels:</strong> Filter by State & Area</li>
+                                <li class="flex items-center gap-2"><span class="text-eco-500">•</span> <strong>National Overview:</strong> Transparent allocations</li>
+                                <li class="flex items-center gap-2"><span class="text-eco-500">•</span> Google Maps API Map Pin Integrations</li>
+                            </ul>
+                        </div>
+
+                        <!-- Screenshot Slot -->
+                        <div class="screenshot-box flex-1 w-full min-h-[160px]">
+                            <span class="text-2xl mb-1">📸</span>
+                            <span class="text-xs font-medium uppercase tracking-wider text-center px-4">Attach Land Allocation Page Here</span>
+                        </div>
+                    </div>
+
+                    <!-- MODULE 4: AI Analytics -->
+                    <div class="glass-panel p-5 border-l-4 border-l-purple-500 shadow-md flex-1 flex flex-col relative">
+                        <div class="absolute -left-6 top-3/4 w-6 h-1 bg-slate-300"></div>
+                        <div class="absolute -right-6 top-1/2 w-6 h-1 bg-slate-300"></div>
+                        <h3 class="font-display font-bold text-lg text-tech-900 mb-2 flex items-center gap-2">
+                            <span class="bg-purple-50 p-1.5 rounded text-purple-600">🧠</span> Module 4: AI Analytics
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">Monitoring restoration progress via AI processed satellite imagery.</p>
+                        
+                        <div class="bg-purple-50/50 p-3 rounded-lg border border-purple-100 mb-4">
+                            <ul class="text-xs text-tech-800 space-y-2 font-medium">
+                                <li class="flex items-center gap-2"><span class="text-purple-500">•</span> <strong>Satellite Timelines:</strong> Baseline to Live Feed</li>
+                                <li class="flex items-center gap-2"><span class="text-purple-500">•</span> <strong>AI Confidence Metrics:</strong> NDVI & Canopy %</li>
+                                <li class="flex items-center gap-2"><span class="text-purple-500">•</span> Predictive Growth Recharts Line Graph</li>
+                            </ul>
+                        </div>
+
+                        <!-- Screenshot Slot -->
+                        <div class="screenshot-box flex-1 w-full min-h-[160px]">
+                            <span class="text-2xl mb-1">📸</span>
+                            <span class="text-xs font-medium uppercase tracking-wider text-center px-4">Attach AI Analytics Page Here</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMN 3: Value Realization (4/12) -->
+                <div class="col-span-4 flex flex-col gap-6 relative">
+                    <!-- Vertical Connector Line connecting from Column 2 -->
+                    <div class="absolute -left-6 top-1/2 bottom-12 w-1 bg-slate-300"></div>
+
+                    <!-- MODULE 5: Credits -->
+                    <div class="glass-panel p-5 border-l-4 border-l-accent-amber shadow-md flex-1 flex flex-col relative">
+                        <div class="absolute -left-6 top-1/2 w-6 h-1 bg-slate-300"></div>
+                        <h3 class="font-display font-bold text-lg text-tech-900 mb-2 flex items-center gap-2">
+                            <span class="bg-amber-50 p-1.5 rounded text-accent-amber">💳</span> Module 5: Credits Dashboard
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">Financial hub for tracking earned ecological value and processing redemptions.</p>
+                        
+                        <div class="bg-amber-50/50 p-3 rounded-lg border border-amber-100 mb-4">
+                            <ul class="text-xs text-tech-800 space-y-2 font-medium">
+                                <li class="flex items-center gap-2"><span class="text-accent-amber">•</span> Wallet Balances (Earned, Redeemed, Pipeline)</li>
+                                <li class="flex items-center gap-2"><span class="text-accent-amber">•</span> Immutable Transaction Ledger Table</li>
+                                <li class="flex items-center gap-2"><span class="text-accent-amber">•</span> <strong>Redemption Hub:</strong> Exchange credits for CSR or ITR</li>
+                            </ul>
+                        </div>
+
+                        <!-- Screenshot Slot -->
+                        <div class="screenshot-box flex-1 w-full min-h-[220px]">
+                            <span class="text-2xl mb-1">📸</span>
+                            <span class="text-xs font-medium uppercase tracking-wider text-center px-4">Attach Credits Dashboard Here</span>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack Summary -->
+                    <div class="bg-tech-900 rounded-xl p-5 border border-tech-800 shadow-lg text-white">
+                        <h4 class="text-xs text-slate-400 font-mono uppercase tracking-widest mb-3 border-b border-slate-700 pb-2">Prototype Tech Stack</h4>
+                        <div class="grid grid-cols-2 gap-3 text-sm font-medium">
+                            <div class="flex items-center gap-2"><span class="text-accent-blue">⚛️</span> React.js</div>
+                            <div class="flex items-center gap-2"><span class="text-eco-400">⚡</span> Vite Bundler</div>
+                            <div class="flex items-center gap-2"><span class="text-accent-blue">🎨</span> Material UI</div>
+                            <div class="flex items-center gap-2"><span class="text-accent-amber">🧭</span> React Router</div>
+                            <div class="flex items-center gap-2"><span class="text-purple-400">📊</span> Recharts</div>
+                            <div class="flex items-center gap-2"><span class="text-eco-400">📍</span> Google Maps API</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP System - Project Expo Chart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    },
+                    colors: {
+                        tech: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' },
+                        eco: { 400: '#34d399', 500: '#10b981', 600: '#059669', 900: '#064e3b' },
+                        accent: { blue: '#0ea5e9', amber: '#f59e0b', purple: '#8b5cf6' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* A3 Landscape Poster Setup */
+        @page { size: A3 landscape; margin: 0; }
+        body { 
+            background-color: #cbd5e1; 
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .a3-canvas {
+            /* Reduced by ~6% to act as a safe margin for printer hardware limits */
+            width: 1480px; height: 1045px;
+            background-color: #ffffff;
+            /* Blueprint/Engineering subtle grid background */
+            background-image: linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative; box-sizing: border-box; 
+            padding: 24px; /* Optimal bounding box */
+            display: flex; flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        
+        @media print {
+            body { background-color: white; }
+            .a3-canvas { width: 100%; height: 100%; padding: 10mm; box-shadow: none; border: none; }
+        }
+
+        /* Structural Elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="a3-canvas">
+        
+        <!-- HEADER -->
+        <header class="flex justify-between items-end pb-3 border-b-4 border-eco-500 mb-4 shrink-0 relative z-10">
+            <div class="flex items-center gap-4">
+                <!-- Tech/Eco Hybrid Logo -->
+                <div class="w-14 h-14 bg-tech-900 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden shrink-0">
+                    <div class="absolute inset-0 bg-gradient-to-br from-eco-400 to-tech-900 opacity-20"></div>
+                    <svg class="w-8 h-8 text-eco-400 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"></circle>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-eco-600 font-bold tracking-widest uppercase text-[10px] mb-0.5">Proposed Digital Public Infrastructure (DPI)</h3>
+                    <h1 class="text-3xl font-display font-extrabold text-tech-900 tracking-tight leading-tight">Green Credit Management and Monitoring System</h1>
+                    <h2 class="text-[14px] font-medium text-slate-500 mt-0.5">A Long-Term Verification & Allocation Platform for MoEFCC's 2023 Initiative</h2>
+                </div>
+            </div>
+            
+            <!-- TEAM DETAILS BOX -->
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 shadow-sm min-w-[420px]">
+                <div class="text-[11px] font-semibold text-tech-900 flex justify-between mb-0.5">
+                    <span class="text-slate-500">CU Project Expo 2026 Project ID:</span> Engi-UIE-Inno-Soft-85
+                </div>
+               
+                
+            </div>
+        </header>
+
+        <!-- 3-COLUMN LAYOUT -->
+        <div class="flex-1 grid grid-cols-12 gap-5 min-h-0 relative z-10">
+            
+            <!-- COLUMN 1: Objectives & Problem (3/12) -->
+            <div class="col-span-3 flex flex-col gap-4">
+                
+                <!-- OBJECTIVES / PROBLEM STATEMENT -->
+                <div class="glass-panel p-4 border-t-4 border-t-accent-amber flex flex-col">
+                    <h2 class="section-title">
+                        <span class="bg-amber-100 p-1.5 rounded text-accent-amber">⚠️</span> Problem Statement
+                    </h2>
+                    <p class="text-[12px] text-slate-600 mb-3 leading-snug">
+                        The Green Credit Programme (initiated late 2023) is currently in its infancy. Scaling it nationwide faces critical bottlenecks:
+                    </p>
+                    <ul class="text-[12px] text-slate-700 space-y-1.5 mb-3 font-medium">
+                        <li class="flex gap-2 items-start"><span class="text-red-500">✗</span> <strong>Manual Allocation:</strong> Fragmented state-level data makes finding degraded land difficult.</li>
+                        <li class="flex gap-2 items-start"><span class="text-red-500">✗</span> <strong>Opaque Verification:</strong> Reliance solely on physical officer visits is slow and prone to corruption.</li>
+                        <li class="flex gap-2 items-start"><span class="text-red-500">✗</span> <strong>Delayed Incentives:</strong> Credit issuance can take 12-24 months, discouraging corporate CSR participation.</li>
+                    </ul>
+
+                    <h2 class="section-title mt-1">
+                        <span class="bg-eco-100 p-1.5 rounded text-eco-600">🎯</span> Objectives
+                    </h2>
+                    <p class="text-[12px] text-slate-600 mb-2 leading-snug">
+                        To build the foundational digital infrastructure required to scale the GCP over the next decade by:
+                    </p>
+                    <ul class="text-[12px] text-slate-700 space-y-1.5 font-medium">
+                        <li class="flex gap-2 items-start"><span class="text-eco-500">✓</span> Centralizing the national inventory of degraded lands using GIS.</li>
+                        <li class="flex gap-2 items-start"><span class="text-eco-500">✓</span> <strong>AI-Assisted Verification</strong> using ISRO Satellite Imagery.</li>
+                        <li class="flex gap-2 items-start"><span class="text-eco-500">✓</span> Creating a transparent, immutable ledger for Green Credit issuance and exchange.</li>
+                    </ul>
+                </div>
+
+                <!-- INFOGRAPHICS (Part 1 - Data/Comparisons) -->
+                <div class="glass-panel p-4 flex-1 flex flex-col">
+                    <h2 class="section-title">
+                        <span class="bg-blue-100 p-1.5 rounded text-accent-blue">📊</span> Impact Infographics
+                    </h2>
+                    <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 text-center">Process Efficiency Comparison</h3>
+                    
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2 text-center">
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">Traditional Flow</div>
+                            <div class="text-[18px] font-bold text-slate-400 my-0.5">Weeks</div>
+                            <div class="text-[9px] text-slate-500">Heavy manual officer audits</div>
+                        </div>
+                        <div class="bg-eco-50 border border-eco-200 rounded-lg p-2 text-center shadow-sm">
+                            <div class="text-[10px] font-bold text-eco-700 uppercase">AI-Assisted Flow</div>
+                            <div class="text-[18px] font-bold text-eco-600 my-0.5">Days</div>
+                            <div class="text-[9px] text-eco-600">90% less manual effort</div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 mt-1 text-center">System Trust Score</h3>
+                    <div class="bg-tech-900 rounded-lg p-4 text-white relative overflow-hidden flex-1 flex flex-col justify-center">
+                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-eco-500 rounded-full blur-xl opacity-20"></div>
+                        <div class="flex items-end gap-2 mb-0.5">
+                            <span class="text-4xl font-display font-bold text-eco-400">99.9%</span>
+                        </div>
+                        <div class="text-xs font-medium text-slate-300 mb-1">Auditability & Transparency</div>
+                        <div class="text-[10px] text-slate-400 leading-snug">Achieved via AI-assisted ISRO ResourceSat satellite ingestion and immutable ledgering, minimizing human bias.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COLUMN 2: Methodology & Block Diagram (6/12) -->
+            <div class="col-span-6 flex flex-col h-full">
+                <div class="glass-panel p-4 h-full border-t-4 border-t-tech-800 flex flex-col">
+                    <h2 class="section-title">
+                        <span class="bg-tech-100 p-1.5 rounded text-tech-800">🏗️</span> Methodology & Block Diagram
+                    </h2>
+                    
+                    <p class="text-[12px] text-slate-500 mb-3 text-center max-w-xl mx-auto leading-snug">
+                        The system employs a microservices architecture, integrating corporate user interfaces with government spatial data and automated AI verification pipelines.
+                    </p>
+
+                    <!-- REBUILT BLOCK DIAGRAM CONTAINER (Fixed paddings and heights) -->
+                    <div class="flex-1 w-full bg-slate-50 rounded-xl border border-slate-200 p-4 flex flex-col justify-between shadow-inner">
+                        
+                        <!-- TIER 1: Presentation Layer -->
+                        <div class="relative shrink-0 border-2 border-dashed border-accent-blue/40 bg-blue-50/30 rounded-lg p-3 pt-6 flex flex-col justify-center">
+                            <div class="absolute -top-2.5 left-5 bg-white text-accent-blue px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-blue-200 shadow-sm">1. Presentation Layer (React SPA)</div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-white border border-slate-200 rounded-md p-3 text-center shadow-sm">
+                                    <div class="text-2xl mb-1">🏢</div>
+                                    <div class="text-[12px] font-bold text-tech-900">Company Portal</div>
+                                    <div class="text-[9px] text-slate-500 mt-0.5">Auth & Profiles</div>
+                                </div>
+                                <div class="bg-white border border-slate-200 rounded-md p-3 text-center shadow-sm">
+                                    <div class="text-2xl mb-1">🗺️</div>
+                                    <div class="text-[12px] font-bold text-tech-900">Land Allocation</div>
+                                    <div class="text-[9px] text-slate-500 mt-0.5">GIS Map Interfaces</div>
+                                </div>
+                                <div class="bg-white border border-slate-200 rounded-md p-3 text-center shadow-sm">
+                                    <div class="text-2xl mb-1">💳</div>
+                                    <div class="text-[12px] font-bold text-tech-900">Credits Dashboard</div>
+                                    <div class="text-[9px] text-slate-500 mt-0.5">Ledger & Redemption</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Downward Flow Connector 1 -->
+                        <div class="h-4 flex justify-center relative z-0 w-full shrink-0">
+                            <div class="w-0.5 h-full bg-slate-300 relative">
+                                <div class="absolute -bottom-[5px] left-[50%] transform -translate-x-1/2 text-slate-400 text-[10px]">▼</div>
+                            </div>
+                        </div>
+
+                        <!-- TIER 2: Logic Layer -->
+                        <div class="relative shrink-0 border-2 border-dashed border-slate-300 bg-slate-100/50 rounded-lg p-3 pt-6 flex flex-col justify-center">
+                            <div class="absolute -top-2.5 left-5 bg-white text-tech-800 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-slate-300 shadow-sm">2. Core Logic Layer (Node.js/Python)</div>
+                            <div class="grid grid-cols-2 gap-4 px-3">
+                                <div class="bg-white border border-slate-200 rounded-md p-3 flex items-center gap-3 shadow-sm">
+                                    <div class="bg-tech-100 p-2 rounded-md text-tech-800 text-xl">⚙️</div>
+                                    <div>
+                                        <div class="text-[12px] font-bold text-tech-900">API Gateway</div>
+                                        <div class="text-[10px] text-slate-500">REST Routing & RBAC</div>
+                                    </div>
+                                </div>
+                                <div class="bg-white border border-slate-200 rounded-md p-3 flex items-center gap-3 shadow-sm">
+                                    <div class="bg-tech-100 p-2 rounded-md text-tech-800 text-xl">🔄</div>
+                                    <div>
+                                        <div class="text-[12px] font-bold text-tech-900">Data Aggregator</div>
+                                        <div class="text-[10px] text-slate-500">Multi-Ministry Mapping</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Downward Flow Connector 2 -->
+                        <div class="h-4 flex justify-center relative z-0 w-full shrink-0">
+                            <div class="w-0.5 h-full bg-slate-300 relative">
+                                <div class="absolute -bottom-[5px] left-[50%] transform -translate-x-1/2 text-slate-400 text-[10px]">▼</div>
+                            </div>
+                        </div>
+
+                        <!-- TIER 3: Persistence & AI -->
+                        <div class="relative shrink-0 border-2 border-dashed border-eco-400 bg-eco-50/40 rounded-lg p-3 pt-6 flex flex-col justify-center">
+                            <div class="absolute -top-2.5 left-5 bg-white text-eco-700 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-eco-300 shadow-sm">3. Persistence & AI Engine</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Databases -->
+                                <div class="bg-white border border-slate-200 rounded-md p-3 shadow-sm flex flex-col justify-center">
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-slate-100 pb-1 text-center">Data Persistence</div>
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100">
+                                            <span class="text-xl">📍</span>
+                                            <div>
+                                                <div class="text-[11px] font-bold text-tech-800">PostGIS Database</div>
+                                                <div class="text-[9px] text-slate-500">Spatial Land Grid Arrays</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100">
+                                            <span class="text-xl">🗄️</span>
+                                            <div>
+                                                <div class="text-[11px] font-bold text-tech-800">PostgreSQL Ledger</div>
+                                                <div class="text-[9px] text-slate-500">Immutable Transactions</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- AI Engine -->
+                                <div class="bg-gradient-to-br from-white to-eco-50 border border-eco-200 rounded-md p-3 shadow-sm flex flex-col justify-center">
+                                    <div class="text-[10px] font-bold text-eco-600 uppercase tracking-widest mb-2 border-b border-eco-100 pb-1 flex items-center gap-1.5">
+                                        <span class="text-base">🧠</span> AI Verification Core
+                                    </div>
+                                    <ul class="text-[10px] text-slate-700 space-y-1.5 ml-1 font-mono">
+                                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-eco-500 shrink-0"></span> Ingest ResourceSat Pipeline</li>
+                                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-eco-500 shrink-0"></span> Compute NDVI & Biomass</li>
+                                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-eco-500 shrink-0"></span> Map Canopy Density (%)</li>
+                                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-accent-amber shrink-0"></span> Output Validation Score</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upward Flow Connector 3 -->
+                        <div class="h-4 flex justify-center relative z-0 w-full shrink-0">
+                            <div class="w-0.5 h-full bg-slate-300 relative">
+                                <div class="absolute -top-[4px] left-[50%] transform -translate-x-1/2 text-slate-400 text-[10px]">▲</div>
+                            </div>
+                        </div>
+
+                        <!-- External Sources Anchor -->
+                        <div class="bg-tech-900 rounded-lg p-2.5 shrink-0 flex justify-between items-center text-white shadow-lg border border-tech-800">
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Data Ingestion Endpoints:</div>
+                            <div class="flex gap-2">
+                                <div class="bg-tech-800 text-[10px] px-2 py-1.5 rounded border border-tech-700 flex items-center gap-1 font-medium"><span class="text-blue-400 text-xs">🛰️</span> ISRO Bhuvan APIs</div>
+                                <div class="bg-tech-800 text-[10px] px-2 py-1.5 rounded border border-tech-700 flex items-center gap-1 font-medium"><span class="text-amber-400 text-xs">🏛️</span> MoEFCC Hub</div>
+                                <div class="bg-tech-800 text-[10px] px-2 py-1.5 rounded border border-tech-700 flex items-center gap-1 font-medium"><span class="text-eco-400 text-xs">📡</span> IoT Telemetry</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMN 3: Outcomes & Future Scope (3/12) -->
+            <div class="col-span-3 flex flex-col gap-4">
+                
+                <!-- INFOGRAPHICS (Part 2 - Logic/Math) -->
+                <div class="glass-panel p-4 border-t-4 border-t-eco-500 flex flex-col">
+                    <h2 class="section-title">
+                        <span class="bg-eco-100 p-1.5 rounded text-eco-600">🧮</span> Credit Calculation
+                    </h2>
+                    <p class="text-[12px] text-slate-500 mb-3 leading-snug">The programmatic logic converting physical restoration into digital credits.</p>
+                    
+                    <div class="bg-tech-900 rounded-xl p-3.5 border border-tech-800 shadow-inner relative overflow-hidden">
+                        <div class="font-mono text-[11px] space-y-1.5">
+                            <div class="text-slate-400 text-[10px]">/* 1. Ecological Perf. Score */</div>
+                            <div class="text-white bg-tech-800 p-1.5 rounded border border-slate-700">
+                                <span class="text-accent-blue">EPS</span> = (Trees_Planted × Survival_Rate)
+                            </div>
+                            
+                            <div class="text-slate-400 text-[10px] mt-2">/* 2. Final Credit Value */</div>
+                            <div class="text-eco-400 font-bold bg-eco-900/30 p-1.5 rounded border border-eco-500/30">
+                                Total_GC = EPS × Species_Factor × VCM
+                            </div>
+                        </div>
+                        <div class="mt-2 text-[9px] text-slate-400 leading-tight">
+                            *Species_Factor: Ecological value multiplier per species<br>
+                            *VCM: Verification Confidence (AI + Admin Consensus)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OUTCOMES / FUTURE SCOPE -->
+                <div class="glass-panel p-4 border-t-4 border-t-purple-500 flex-1 flex flex-col">
+                    <h2 class="section-title">
+                        <span class="bg-purple-100 p-1.5 rounded text-purple-600">🚀</span> Outcomes & Future Scope
+                    </h2>
+                    
+                    <div class="mb-3">
+                        <h3 class="text-[10px] font-bold text-tech-900 uppercase tracking-widest mb-1.5 border-b border-slate-200 pb-1">Immediate Outcomes</h3>
+                        <ul class="text-[12px] text-slate-600 space-y-1.5 font-medium">
+                            <li class="flex gap-1.5 items-start"><span class="text-eco-500">✔</span> <span class="leading-snug"><strong>Accelerated CSR:</strong> Connects corporate capital directly to degraded land.</span></li>
+                            <li class="flex gap-1.5 items-start"><span class="text-eco-500">✔</span> <span class="leading-snug"><strong>AI-Assisted Trust:</strong> Reduces human verification effort by 90% while retaining final admin oversight.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="flex-1">
+                        <h3 class="text-[10px] font-bold text-tech-900 uppercase tracking-widest mb-1.5 border-b border-slate-200 pb-1">Long-Term Vision (2026-2030)</h3>
+                        <p class="text-[11px] text-slate-500 mb-2 leading-snug">
+                            Because the GCP is newly initiated, this architecture is built to scale drastically over the next decade:
+                        </p>
+                        <div class="space-y-2">
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-200">
+                                <div class="text-[11px] font-bold text-tech-800 flex items-center gap-1"><span class="text-purple-500">🔗</span> Blockchain Integration</div>
+                                <div class="text-[10px] text-slate-500 mt-0.5 leading-tight">Moving credit management to a permissioned blockchain, treating credits as secure digital tokens.</div>
+                            </div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-200">
+                                <div class="text-[11px] font-bold text-tech-800 flex items-center gap-1"><span class="text-accent-blue">🌍</span> Carbon Market Linking</div>
+                                <div class="text-[10px] text-slate-500 mt-0.5 leading-tight">Enabling Green Credits to be traded on international offset marketplaces.</div>
+                            </div>
+                            <div class="bg-slate-50 p-1.5 rounded border border-slate-200">
+                                <div class="text-[11px] font-bold text-tech-800 flex items-center gap-1"><span class="text-eco-500">🚁</span> Targeted Drone Audits</div>
+                                <div class="text-[10px] text-slate-500 mt-0.5 leading-tight">Deploying drones strictly for flagged cases requiring deeper manual verification, keeping core satellite costs low.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP System - A4 Documentation Cover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    },
+                    colors: {
+                        tech: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' },
+                        eco: { 400: '#34d399', 500: '#10b981', 600: '#059669', 900: '#064e3b' },
+                        accent: { blue: '#0ea5e9', amber: '#f59e0b', purple: '#8b5cf6' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* A4 Portrait Setup */
+        @page { size: A4 portrait; margin: 0; }
+        body { 
+            background-color: #cbd5e1; 
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .a4-canvas {
+            /* Exact A4 Dimensions at 96 DPI */
+            width: 794px; height: 1123px;
+            background-color: #ffffff;
+            /* Blueprint grid background */
+            background-image: linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative; box-sizing: border-box; 
+            padding: 48px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        
+        @media print {
+            body { background-color: white; }
+            .a4-canvas { width: 100%; height: 100%; padding: 15mm; box-shadow: none; border: none; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="a4-canvas">
+        <!-- Background Decorative Elements -->
+        <div class="absolute -right-20 -top-20 w-96 h-96 bg-eco-500 rounded-full blur-3xl opacity-10 pointer-events-none z-0"></div>
+        <div class="absolute -left-32 bottom-20 w-96 h-96 bg-accent-blue rounded-full blur-3xl opacity-5 pointer-events-none z-0"></div>
+
+        <!-- HEADER LOGOS -->
+        <header class="flex justify-between items-start border-b-4 border-eco-500 pb-6 mb-12 z-10 shrink-0">
+            <!-- Ministry Info -->
+            <div class="flex items-center gap-4">
+                <div class="py-2">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Government of India</div>
+                    <div class="text-sm font-bold text-tech-900 leading-tight">Ministry of Environment,<br>Forest & Climate Change</div>
+                </div>
+            </div>
+
+            <!-- Tech Logo -->
+            <div class="w-16 h-16 bg-tech-900 rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden shrink-0 mt-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-eco-400 to-tech-900 opacity-20"></div>
+                <svg class="w-10 h-10 text-eco-400 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"></circle>
+                </svg>
+            </div>
+        </header>
+
+        <!-- PROJECT TITLE SECTION -->
+        <div class="flex-1 flex flex-col justify-center z-10 my-4">
+            <div class="inline-flex items-center gap-2 bg-eco-50 border border-eco-200 text-eco-700 px-4 py-2 rounded-full font-bold text-sm tracking-widest uppercase mb-6 self-start shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-eco-500 animate-pulse"></span>
+                Project Documentation Phase 1
+            </div>
+
+            <h1 class="text-6xl font-display font-extrabold text-tech-900 tracking-tight leading-tight mb-4">
+                Green Credit<br>Programme
+            </h1>
+            <h2 class="text-4xl font-display font-bold text-eco-600 tracking-tight mb-6">
+                Automation Engine
+            </h2>
+            
+            <p class="text-lg text-slate-500 font-medium max-w-2xl leading-relaxed border-l-4 border-slate-300 pl-5">
+                A Long-Term Verification & Allocation Platform designed to scale MoEFCC's 2023 Initiative using AI-Assisted Satellite Analytics and Immutable Ledgering.
+            </p>
+        </div>
+
+        <!-- TEAM & PROJECT DETAILS CARDS -->
+        <div class="z-10 mt-auto shrink-0 space-y-6">
+            
+            <!-- Event & Project Info -->
+            <div class="glass-card p-6 flex justify-between items-center bg-gradient-to-r from-white to-slate-50">
+                <div>
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Event</div>
+                    <div class="text-xl font-bold text-tech-900">CU Project Expo 2026</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Project ID</div>
+                    <div class="text-xl font-mono font-bold text-accent-blue bg-blue-50 px-3 py-1 rounded-md border border-blue-100">Engi-UIE-Inno-Soft-85</div>
+                </div>
+            </div>
+
+            <!-- Team Details -->
+            <div class="glass-card p-8 border-t-4 border-t-tech-900 shadow-xl">
+                <div class="flex justify-between items-start mb-8 border-b border-slate-200 pb-6">
+                    <div>
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Team Name</div>
+                        <!-- REPLACE [Your Team Name] BELOW -->
+                        <div class="text-2xl font-display font-bold text-tech-900">[Your Team Name]</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Project Mentor</div>
+                        <div class="text-xl font-display font-bold text-eco-600">Er. Neelmani Samal</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Team Members</div>
+                    
+                    <div class="grid grid-cols-2 gap-x-12 gap-y-4">
+                        <!-- Member 1 -->
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-eco-300 transition-colors">
+                            <span class="font-bold text-tech-800">Gurshaan Singh</span>
+                            <span class="font-mono text-sm text-slate-500 font-semibold bg-white px-2 py-0.5 rounded shadow-sm">23BCS14185</span>
+                        </div>
+                        
+                        <!-- Member 2 -->
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-eco-300 transition-colors">
+                            <span class="font-bold text-tech-800">Shivam kumar</span>
+                            <span class="font-mono text-sm text-slate-500 font-semibold bg-white px-2 py-0.5 rounded shadow-sm">23BCS14207</span>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-eco-300 transition-colors">
+                            <span class="font-bold text-tech-800">Yash Sharma</span>
+                            <span class="font-mono text-sm text-slate-500 font-semibold bg-white px-2 py-0.5 rounded shadow-sm">23BCS14110</span>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-eco-300 transition-colors">
+                            <span class="font-bold text-tech-800">Chetan</span>
+                            <span class="font-mono text-sm text-slate-500 font-semibold bg-white px-2 py-0.5 rounded shadow-sm">23BCS14033</span>
+                        </div>
+
+                        <!-- Member 5 (Centered to span full width nicely) -->
+                        <div class="col-span-2 flex justify-center">
+                            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-eco-300 transition-colors w-1/2 min-w-[300px]">
+                                <span class="font-bold text-tech-800">Manit Saxena</span>
+                                <span class="font-mono text-sm text-slate-500 font-semibold bg-white px-2 py-0.5 rounded shadow-sm">23BCS12095</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
